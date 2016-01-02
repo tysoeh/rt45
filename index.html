@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html ng-app="rt45">
+
+<head>
+    <script src="./bower_components/angular/angular.js"></script>
+    <script src="./scripts/app.js"></script>
+    <script src="./scripts/septa.js"></script>
+    <script src="./scripts/controllers.js"></script>
+</head>
+
+<body ng-controller="MainController">
+    <div class="schedule" ng-repeat="arrival in arrivals">
+        <p>{{ arrival.date }}</p>
+    </div>
+</body>
+
+</html>
