@@ -1,16 +1,17 @@
-
-    <div class="container">
-        <h3>{{  info }}</h3>
+<div class="container">
+    <div class="info">
+        <div class="clock">
+            <h3>{{ date | date:'hh:mm a' }} Goin' {{ direction }}!</h2>
+        </div>
+        <h4>Next scheduled:</h4>
         <div class="schedule" ng-repeat="arrival in arrivals">
             <p>{{ arrival.date }}</p>
-        </div>
-        <div class="clock">
-            <h2>And it is currently {{ date | date:'hh:mm a' }}!</h2>
-        </div>
-        <div class="map">
-            <leaflet center="center" width="200px" height="480px" markers="markers" paths="45path"></leaflet>
         </div>
         <div class="alerts">
             <p>{{ detours }}</p>
         </div>
     </div>
+    <div class="map">
+        <leaflet center="center" height="568px" markers="markers" paths="paths"></leaflet>
+    </div>
+</div>

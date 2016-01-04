@@ -1,16 +1,15 @@
 app.controller('MainController', ['$scope', function($scope) {}])
-    .controller('NorthController', ['$scope', 'northSched', 'locations', 'detours', function($scope, northSched, locations, detours) {
+    .controller('NorthController', ['$scope', 'routeTrace', 'northSched', 'locations', 'detours', function($scope, routeTrace, northSched, locations, detours) {
         northSched.success(function(data) {
             $scope.arrivals = data["45"];
         });
         detours.success(function(data) {
             $scope.detours = data.route_info;
         });
-        $scope.loadPaths = function loadPaths() {
-            $http.get('../45path.json').success(function(data) {
-                $scope.45 path = data;
-            });
-        };
+        /*routeTrace.success(function(data) {
+            $scope.paths.push(data.features[0].geometry.coordinates[0][0]);
+            console.log(data.features[0].geometry.coordinates[0][0]);
+        });*/
         locations.success(function(data) {
             var buses = data.bus;
 
@@ -36,7 +35,9 @@ app.controller('MainController', ['$scope', function($scope) {}])
             zoom: 14
         };
         $scope.markers = new Array();
-        $scope.info = "The next buses to arrive at 10th and Passyunk are:";
+        $scope.paths = new Array();
+
+        $scope.direction = "North";
 
         $scope.date = new Date();
 
@@ -69,12 +70,12 @@ app.controller('MainController', ['$scope', function($scope) {}])
     });
     //center map on the beginning of southbound route
     $scope.center = {
-        lat: 39.92485,
-        lng: -75.164125,
+        lat: 39.952187,
+        lng: -75.15995,
         zoom: 14
     };
     $scope.markers = new Array();
-    $scope.info = "The next buses heading to South Philly from 12th and Spruce are scheduled to arrive at:";
+    $scope.direction = "South";
     $scope.date = new Date();
 
 }]);

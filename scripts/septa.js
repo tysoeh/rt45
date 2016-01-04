@@ -1,4 +1,12 @@
-app.factory('northSched', ['$http', function($http) {
+app.factory('routeTrace', ['$http', function($http) {
+    return $http.get('../45path1.json')
+        .success(function(data) {
+            return (data);
+        })
+        .error(function(err) {
+            return (err);
+        });
+}]).factory('northSched', ['$http', function($http) {
     return $http.get('http://cors.io/?u=http://www3.septa.org/hackathon/BusSchedules/?req1=16608&req2=45&req3=i&req6=4')
         .success(function(data) {
             return (data);
@@ -6,7 +14,6 @@ app.factory('northSched', ['$http', function($http) {
         .error(function(err) {
             return (err);
         });
-
 }]).factory('southSched', ['$http', function($http) {
     return $http.get('http://cors.io/?u=http://www3.septa.org/hackathon/BusSchedules/?req1=16498&req2=45&req3=i&req6=4')
         .success(function(data) {
