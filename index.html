@@ -2,15 +2,18 @@
 <html ng-app="rt45">
 
 <head>
+    <link rel="stylesheet" href="./bower_components/leaflet/dist/leaflet.css">
     <script src="./bower_components/angular/angular.js"></script>
     <script src="./bower_components/angular-route/angular-route.js"></script>
-    <script src="./scripts/app.js"></script>
-    <script src="./scripts/septa.js"></script>
-    <script src="./scripts/controllers.js"></script>
+    <script src="./bower_components/leaflet/dist/leaflet.js"></script>
+    <script src="./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.min.js"></script>
 </head>
 
 <body>
     <div ng-view></div>
+    <script src="./scripts/app.js"></script>
+    <script src="./scripts/septa.js"></script>
+    <script src="./scripts/controllers.js"></script>
 </body>
 
 </html>

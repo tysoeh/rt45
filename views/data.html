@@ -1,11 +1,16 @@
-<a href="/">
+
     <div class="container">
         <h3>{{  info }}</h3>
         <div class="schedule" ng-repeat="arrival in arrivals">
             <p>{{ arrival.date }}</p>
         </div>
         <div class="clock">
-            <h2>And it is currently {{ date | date:'HH:mm' }}!</h2>
+            <h2>And it is currently {{ date | date:'hh:mm a' }}!</h2>
+        </div>
+        <div class="map">
+            <leaflet center="center" width="200px" height="480px" markers="markers" paths="45path"></leaflet>
+        </div>
+        <div class="alerts">
+            <p>{{ detours }}</p>
         </div>
     </div>
-</a>

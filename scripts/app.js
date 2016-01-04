@@ -1,4 +1,4 @@
-var app = angular.module('rt45', ['ngRoute']);
+var app = angular.module('rt45', ['ngRoute', 'leaflet-directive']);
 
 app.config(function($routeProvider) {
     $routeProvider
