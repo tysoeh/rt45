@@ -1,7 +1,7 @@
 <div class="container">
     <div class="info">
         <div class="clock">
-            <h3>{{ date | date:'hh:mm a' }} Goin' {{ direction }}!</h2>
+            <h3>{{ date | date:'hh:mm a' }}<br>Goin' {{ direction }}!</h2>
         </div>
         <h4>Next scheduled:</h4>
         <div class="schedule" ng-repeat="arrival in arrivals">
@@ -12,6 +12,6 @@
         </div>
     </div>
     <div class="map">
-        <leaflet center="center" height="568px" markers="markers" paths="paths"></leaflet>
+        <leaflet center="center" height="100%" markers="markers" paths="paths"></leaflet>
     </div>
 </div>
