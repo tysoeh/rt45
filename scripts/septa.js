@@ -1,5 +1,5 @@
 app.factory('routeTrace', ['$http', function($http) {
-    return $http.get('45path1.json')
+    return $http.get('45.json')
         .success(function(data) {
             return (data);
         })

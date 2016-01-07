@@ -6,10 +6,29 @@ app.controller('MainController', ['$scope', function($scope) {}])
         detours.success(function(data) {
             $scope.detours = data.route_info;
         });
-        /*routeTrace.success(function(data) {
-            $scope.paths.push(data.features[0].geometry.coordinates[0][0]);
-            console.log(data.features[0].geometry.coordinates[0][0]);
-        });*/
+        routeTrace.success(function(data) {
+
+            //var lines = array of LineString objects, each containing a 'coordinates:' array containing coord pair arrays
+            var lines = data.features[0].geometry.geometries;
+            console.log(data.features[0].geometry.geometries[2].coordinates);
+
+            //for each LineString object, tunnel into the array of coordinate pair arrays
+            for (i = 0; i < lines.length; i++) {
+                var linePoints = lines[i].coordinates;
+
+                //for each coordinate pair, extract lat and lon, save to object, push to paths object array
+                for (j = 0; j < linePoints.length; j++) {
+                    var lat = parseFloat(linePoints[j][1]);
+                    var lng = parseFloat(linePoints[j][0]);
+                    var coords = {
+                        lat: lat,
+                        lng: lng
+                    };
+                    //console.log(coords);
+                    $scope.paths.polyline.latlngs.push(coords);
+                }
+            }
+        });
         locations.success(function(data) {
             var buses = data.bus;
 
@@ -21,10 +40,15 @@ app.controller('MainController', ['$scope', function($scope) {}])
                     var lng = parseFloat(buses[i].lng);
                     var coords = {
                         lat: lat,
-                        lng: lng
+                        lng: lng,
+                        icon: {
+                            iconUrl: 'apple-touch-icon.png',
+                            iconSize: [40, 40]
+                        }
                     };
                     console.log(coords);
                     $scope.markers.push(coords);
+                    console.log($scope.markers);
                 }
             }
         });
@@ -35,21 +59,50 @@ app.controller('MainController', ['$scope', function($scope) {}])
             zoom: 14
         };
         $scope.markers = new Array();
-        $scope.paths = new Array();
+        $scope.markers.push({
+            lat: 39.931609,
+            lng: -75.16122,
+        });
 
+        $scope.paths = {
+            polyline: {
+                type: "polyline",
+                latlngs: []
+            }
+        };
         $scope.direction = "North";
-
         $scope.date = new Date();
-
-
     }])
 
-.controller('SouthController', ['$scope', 'southSched', 'locations', 'detours', function($scope, southSched, locations, detours) {
+.controller('SouthController', ['$scope', 'routeTrace', 'southSched', 'locations', 'detours', function($scope, routeTrace, southSched, locations, detours) {
     southSched.success(function(data) {
         $scope.arrivals = data["45"];
     });
     detours.success(function(data) {
         $scope.detours = data.route_info;
+    });
+    routeTrace.success(function(data) {
+
+        //var lines = array of LineString objects, each containing a 'coordinates:' array containing coord pair arrays
+        var lines = data.features[0].geometry.geometries;
+        console.log(data.features[0].geometry.geometries[2].coordinates);
+
+        //for each LineString object, tunnel into the array of coordinate pair arrays
+        for (i = 0; i < lines.length; i++) {
+            var linePoints = lines[i].coordinates;
+
+            //for each coordinate pair, extract lat and lon, save to object, push to paths object array
+            for (j = 0; j < linePoints.length; j++) {
+                var lat = parseFloat(linePoints[j][1]);
+                var lng = parseFloat(linePoints[j][0]);
+                var coords = {
+                    lat: lat,
+                    lng: lng
+                };
+                //console.log(coords);
+                $scope.paths.polyline.latlngs.push(coords);
+            }
+        }
     });
     locations.success(function(data) {
         var buses = data.bus;
@@ -61,7 +114,11 @@ app.controller('MainController', ['$scope', function($scope) {}])
                 var lng = parseFloat(buses[i].lng);
                 var coords = {
                     lat: parseFloat(buses[i].lat),
-                    lng: lng
+                    lng: lng,
+                    icon: {
+                        iconUrl: 'apple-touch-icon.png',
+                        iconSize: [40, 40]
+                    }
                 };
                 console.log(coords);
                 $scope.markers.push(coords);
@@ -75,6 +132,16 @@ app.controller('MainController', ['$scope', function($scope) {}])
         zoom: 14
     };
     $scope.markers = new Array();
+    $scope.markers.push({
+        lat: 39.946629,
+        lng: -75.161116
+    });
+    $scope.paths = {
+        polyline: {
+            type: "polyline",
+            latlngs: []
+        }
+    };
     $scope.direction = "South";
     $scope.date = new Date();
 
