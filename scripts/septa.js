@@ -1,5 +1,9 @@
 app.factory('routeTrace', ['$http', function($http) {
-    return $http.get('45.json')
+    return $http({
+          method: 'GET',
+          url: '45.json',
+          withCredentials: true
+        })
         .success(function(data) {
             return (data);
         })
@@ -7,7 +11,11 @@ app.factory('routeTrace', ['$http', function($http) {
             return (err);
         });
 }]).factory('northSched', ['$http', function($http) {
-    return $http.get('http://www3.septa.org/hackathon/BusSchedules/?req1=16608&req2=45&req3=i&req6=4')
+    return $http({
+          method: 'GET',
+          url: 'http://www3.septa.org/hackathon/BusSchedules/?req1=16608&req2=45&req3=i&req6=4',
+          withCredentials: true
+        })
         .success(function(data) {
             return (data);
         })
