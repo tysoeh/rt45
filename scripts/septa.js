@@ -12,7 +12,7 @@ app.factory('routeTrace', ['$http', function($http) {
         });
 }]).factory('northSched', ['$http', function($http) {
     return $http({
-          method: 'GET',
+          method: 'JSONP',
           url: 'http://www3.septa.org/hackathon/BusSchedules/?req1=16608&req2=45&req3=i&req6=4',
           withCredentials: true
         })
